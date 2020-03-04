@@ -11,39 +11,36 @@
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
-Route::get('/contact', function () { return view('contact'); });
-Route::get('/about', function (){
-    return view('about');
+Route::get('/', 'PagesController@home');
+
+Route::get('/about', function () {
+    return view('about', [
+        'articles' => App\Article::take(3)->latest()->get()
+    ]);
 });
 
+Route::get('/articles', 'ArticlesController@index')->name('articles.index'); // Selects all articles
+Route::post('/articles', 'ArticlesController@store'); // Creates an article
+Route::put('/articles/{article}', 'ArticlesController@update'); // Updates an article
+Route::get('/articles/create', 'ArticlesController@create'); // Gets a view to create an article
+Route::get('/articles/{article}', 'ArticlesController@show')->name('articles.show'); // Selects 1 article
+Route::get('/articles/{article}/edit', 'ArticlesController@edit'); // Gets a view to edit an article
 
-//putting your name in the blade trough url
-//Route::get('/', function () {
-//    $name = request('name');
-//
-//    return view('test',[
-//        'name' => request('name')
-//    ]);
-//});
+// Ep 22 Restful Routing
 
-
-
-//putting your url to blade ->made and moved to PostsController
-//Route::get('/posts/{post}', function ($post){
-//     $posts = [
-//         'my-first-post'=> 'Hello this is my firts blogpost',
-//         'my-second-post'=>'Now i get the hang of this bloggy thing',
-//         'my-third-post'=>'i can do this all day'
-//     ];
-//     if (! array_key_exists($post, $posts)){
-//         abort(404,'Sorry the post was not found');
-//     }
-//
-//     return view('post',[
-//         'post'=> $posts[$post]
-//     ]);
-//});
+// GET /articles | Select/Show all articles
+// GET /articles/:id | Select/Show 1 article
+// POST /articles | Insert/Create an article
+// PUT /articles/:id | Update an article
+// DELETE /articles/:id | Delete an article
 
 
-Route::get('/posts/{post}', 'PostsController@show');
+// Example with videos
+
+// GET /videos | Select/Show all videos
+// GET /videos/create | Select fields to put in a form to create a video
+// POST /videos | Insert/Create a video
+// GET /videos/2 | Select/Show 1 video
+// GET /videos/2/edit | Select data to show a form to edit the video
+// PUT /videos/2 | Update a video
+// DELETE /video/5 | Delete a video

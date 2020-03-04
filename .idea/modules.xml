@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/laracast.iml" filepath="$PROJECT_DIR$/.idea/laracast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LaravelPractice.iml" filepath="$PROJECT_DIR$/.idea/LaravelPractice.iml" />
     </modules>
   </component>
 </project>
